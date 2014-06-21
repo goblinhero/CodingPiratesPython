@@ -1,10 +1,10 @@
 import pygame, random
 
 def init():
-    global images, antal_fjender, point_for_fjende
+    global grafik, antal_fjender, point_for_fjende
     antal_fjender = 12
     point_for_fjende = 30
-    images = [pygame.image.load('player.png'),
+    grafik = [pygame.image.load('player.png'),
               pygame.image.load('enemy.png'),
               pygame.image.load('block.png')]
     
@@ -19,7 +19,7 @@ class Spil(object):
             for y in range(0, 480, 32):
                 if x in (0,640-32) or y in (0, 480-32):
                     wall = pygame.sprite.Sprite(self.walls)
-                    wall.image = images[2]
+                    wall.image = grafik[2]
                     wall.rect = pygame.rect.Rect((x,y), wall.image.get_size())
         self.sprites.add(self.walls)
         self.enemies = pygame.sprite.Group()
@@ -47,7 +47,7 @@ class Spil(object):
 class Spiller(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super(Spiller, self).__init__(*groups)
-        self.image = images[0]
+        self.image = grafik[0]
         self.rect = pygame.rect.Rect((320,240),self.image.get_size())
         self.dy = 0
         self.score = 0
@@ -85,7 +85,7 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self,*groups):
         super(Enemy, self).__init__(*groups)
         self.changeSpeed()
-        self.image = images[1]
+        self.image = grafik[1]
         self.rect = pygame.rect.Rect((450,240), self.image.get_size())
         self.moving = 1 #Right
     def changeSpeed(self):
