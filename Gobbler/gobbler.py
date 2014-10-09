@@ -18,6 +18,10 @@ class Spil(object):
         self.mines = pygame.sprite.Group()
         self.mine = Mine(self.sprites)
         self.mines.add(self.mine)
+        self.mine1 = Mine(self.sprites)
+        self.mine1.rect = pygame.rect.Rect((100,100),self.mine1.image.get_size())
+        self.mine1.lodret = -1
+        self.mines.add(self.mine1)
         self.walls = pygame.sprite.Group()
         self.playerWon = False
         self.playerLost = False
@@ -66,9 +70,12 @@ class Mine(pygame.sprite.Sprite):
         for cell in pygame.sprite.spritecollide(self, game.walls, False):
             if(cell.rect.y == 448):
                 self.lodret = -1
-            print(cell.rect.x)
-            print(cell.rect.y)
-        
+            if(cell.rect.x == 608):
+                self.vandret = -1
+            if(cell.rect.y == 0):
+                self.lodret = 1
+            if(cell.rect.x == 0):
+                self.vandret = 1
 
 class Spiller(pygame.sprite.Sprite):
     def __init__(self, *groups):
